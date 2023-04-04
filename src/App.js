@@ -22,7 +22,7 @@ function App() {
       <div>
         <Navbar 
         isLoggedIn={isLoggedIn} 
-        setLoggedIn={setIsLoggedIn}/>
+        setIsLoggedIn={setIsLoggedIn}/>
       </div>
 
       <Routes>
