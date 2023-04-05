@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 import { AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 
-function SignupForm({setIsLoggedIn}) {
+function SignupForm({setIsLoggedIn,setIsAccountCreated}) {
     const navigate=useNavigate();
 
     const [formData,setFormData]=useState(
@@ -79,20 +79,24 @@ function SignupForm({setIsLoggedIn}) {
          }))
         }
         else{
-            //user logged in 
-            setIsLoggedIn(true);
-            toast.success("Account Created");
-            const accountData={
-                ...formData
-            };
-            const finalData={
-                ...accountData,
-                accountType
-            }
-            console.log("printing account data",finalData);
-            navigate("/dashboard");
-            
-          }
+          setIsAccountCreated(true); //first time user created its account in study motion
+          console.log(" value of setIsAccountCreated after signing up :",setIsAccountCreated)
+          setIsLoggedIn(true); //user logged in
+
+          toast.success("Account Created");
+          const accountData = {
+            ...formData,
+          };
+          const finalData = {
+            ...accountData,
+            accountType,
+          };
+          console.log("printing account data", finalData);
+          // console.log(finalData.email)
+          localStorage.setItem("userEmail",finalData.email);
+          localStorage.setItem("userPassword",finalData.password);
+          navigate("/dashboard");
+        }
     }
   return (
     <div>

@@ -3,7 +3,9 @@ import {AiOutlineEye,AiOutlineEyeInvisible} from "react-icons/ai";
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 
-function LoginForm({setIsLoggedIn}) {
+function LoginForm({setIsLoggedIn,setAccountCreated}) {
+    
+        
     const [formData,setFormData]=useState(
         {
             email:"",
@@ -11,8 +13,7 @@ function LoginForm({setIsLoggedIn}) {
         }
     )
     const [showPassword,setShowPassword]=useState(false);
-
-    const navigate=useNavigate();
+        const navigate=useNavigate();
 
 
     function changeHandler(event)
@@ -28,11 +29,29 @@ function LoginForm({setIsLoggedIn}) {
     function submitHandler(event)
     {
         event.preventDefault();
-        setIsLoggedIn(true);
-        toast.success("Logged in !");
-        console.log("Printing form data");
-        console.log(formData);
-        navigate("/dashboard");
+        console.log("setAccountCreated:",setAccountCreated)
+        if(setAccountCreated){
+            
+            //user Account exists in local storage
+
+            const userEmail=localStorage.getItem("userEmail");
+            console.log("userEmail is ",userEmail);
+            const userPassword=localStorage.getItem("userPassword");
+            if(formData.email===userEmail && formData.password=== userPassword)
+            {
+                navigate("/dashboard");
+                setIsLoggedIn(true);
+                toast.success("Logged in !");
+                console.log("Printing form data");
+                console.log(formData);    
+            }
+            
+        }
+        else{
+            //user Account doesn't exist
+            toast.error("No Account Found");
+            navigate("/signup");
+        }
     }
 
   return (

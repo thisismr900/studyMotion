@@ -12,6 +12,9 @@ import PrivateRoute from "./components/PrivateRoute";
 function App() {
 
   const[isLoggedIn,setIsLoggedIn]=useState(false);
+  const [isAccountCreated,setIsAccountCreated]=useState(false);
+ 
+ 
   // useEffect(()=>
   // {
     // setIsLoggedIn(false);
@@ -27,8 +30,16 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home isLoggedIn={isLoggedIn}/>}/>
-        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn}/>} />
-        <Route path="/signup" element={<Signup setIsLoggedIn={setIsLoggedIn}/>} />
+        <Route path="/login" element={
+              <Login 
+              setIsLoggedIn={setIsLoggedIn}
+              setIsAccountCreated={setIsAccountCreated}
+              />} />
+        <Route path="/signup" element={
+              <Signup 
+              setIsLoggedIn={setIsLoggedIn}
+              setIsAccountCreated={setIsAccountCreated}
+              />} />
         <Route path="/dashboard" element=
         {
           <PrivateRoute isLoggedIn={isLoggedIn}>

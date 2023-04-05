@@ -2,7 +2,7 @@ import React from 'react'
 import Template from '../components/Template'
 import loginImg from '../assets/login.png'
 
-function Login({setIsLoggedIn}) {
+function Login({setIsLoggedIn,setIsAccountCreated}) {
   return (
     <div>
         <Template
@@ -11,7 +11,8 @@ function Login({setIsLoggedIn}) {
             desc2="Education to future-proof your career."
             image={loginImg}
             formtype="login"
-            setIsLoggedIn={setIsLoggedIn}  
+            setIsLoggedIn={setIsLoggedIn}
+            setIsAccountCreated={setIsAccountCreated}  
         />
     </div>
   )
